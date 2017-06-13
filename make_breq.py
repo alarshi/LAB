@@ -51,7 +51,7 @@ while line:
     evrec2 = evrec1 + datetime.timedelta(0, P_after)
     evrec1_str = evrec1.strftime("%Y %m %d %H %M %S") 
     evrec2_str = evrec2.strftime("%Y %m %d %H %M %S")
-    label="event_test00%s" %k  # name of the individual files
+    label="event_00%s" %k  # name of the individual files
     with open(label, "w") as Event:
          Event.write('.NAME Arushi Saxena\n.INST University of Memphis\n.ADDRESS 3525 Clayphil Avenue\n.EMAIL asaxena@memphis.edu\n.PHONE 9015303960\n\
 .FAX YOUR_FAX\n.MEDIA: FTP\n.ALTERNATE MEDIA: DAT\n.ALTERNATE MEDIA: DLT3\n.LABEL %s\n.QUALITY E\n.END\n' %label)  # header
