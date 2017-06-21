@@ -46,13 +46,15 @@ while line:
       k = k+1
       arrivals = model.get_travel_times(source_depth_in_km = float(event[8]), distance_in_degree=dist, phase_list=["P" , "Pdiff" , "PKP"])
       tt = arrivals[0].time  # travel time,
-      print (tt) 
-      evor = datetime.datetime(int(event[0]), int(event[1]), int(event[2]), int(event[3]), int(event[4]), round(float(event[5]))) # origin time
+      evor = datetime.datetime(int(event[0]), int(event[1]), int(event[2]), int(event[3]), int(event[4]), int(float(event[5]))) # origin time
       evrec1 = evor + datetime.timedelta(0, (tt - P_before))
       evrec2 = evrec1 + datetime.timedelta(0, P_after)
       evrec1_str = evrec1.strftime("%Y %m %d %H %M %S") 
       evrec2_str = evrec2.strftime("%Y %m %d %H %M %S")
       label="event_00%s" %k  # name of the individual files
+      fi = open('preprocess.txt', "a") # create file with all the relevant events
+      fi.write(line)
+      fi.close()
       with open(label, "w") as Event:
          Event.write('.NAME Arushi Saxena\n.INST University of Memphis\n.ADDRESS 3525 Clayphil Avenue\n.EMAIL asaxena@memphis.edu\n.PHONE 9015303960\n\
 .FAX YOUR_FAX\n.MEDIA: FTP\n.ALTERNATE MEDIA: DAT\n.ALTERNATE MEDIA: DLT3\n.LABEL %s\n.QUALITY E\n.END\n' %label)  # header
