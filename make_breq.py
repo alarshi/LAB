@@ -22,6 +22,8 @@ from obspy.taup import TauPyModel
 from obspy.geodetics import locations2degrees
 model = TauPyModel(model="iasp91")
 
+os.system('rm -f preprocess.txt events_info.txt')
+
 #  Time before the P, Pdiff, or PKP arrival wanted to start traces (sec)
 P_before=300.0;
 #  Time after the P, Pdiff, or PKP arrival wanted (sec)
@@ -32,12 +34,12 @@ os.system(''' awk 'BEGIN { FS = "," }/^2/{print $1 $2, $3, $4}' query.csv | sed 
           sed 's/:/ /g' |  awk '{gsub(/\-/," ",$1); print}' > events_info.txt ''')
 
 #  cooridnates for the center of the region area
-stalat=37.;
-stalon=-90.;
+stalat = 37.;
+stalon = -90.;
 
 f = open('events_info.txt','r')
 line = f.readline()
-k = 0
+k = 00
 while line:
     event = line.split(' ')  # each event as string    
     if not event : break
@@ -49,11 +51,12 @@ while line:
       evor = datetime.datetime(int(event[0]), int(event[1]), int(event[2]), int(event[3]), int(event[4]), int(float(event[5]))) # origin time
       evrec1 = evor + datetime.timedelta(0, (tt - P_before))
       evrec2 = evrec1 + datetime.timedelta(0, P_after)
+      evor_str = evor.strftime("%Y %j %H %M %S ")
       evrec1_str = evrec1.strftime("%Y %m %d %H %M %S") 
       evrec2_str = evrec2.strftime("%Y %m %d %H %M %S")
-      label="event_00%s" %k  # name of the individual files
+      label="event_00" + "%02d" %k  # name of the individual files
       fi = open('preprocess.txt', "a") # create file with all the relevant events
-      fi.write(line)
+      fi.write(evor_str + event[6] + " " + event[7] + " " + event[8])
       fi.close()
       with open(label, "w") as Event:
          Event.write('.NAME Arushi Saxena\n.INST University of Memphis\n.ADDRESS 3525 Clayphil Avenue\n.EMAIL asaxena@memphis.edu\n.PHONE 9015303960\n\
