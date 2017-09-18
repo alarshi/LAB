@@ -56,7 +56,7 @@ while line:
       evrec2_str = evrec2.strftime("%Y %m %d %H %M %S")
       label="event_00" + "%02d" %k  # name of the individual files
       fi = open('preprocess.txt', "a") # create file with all the relevant events
-      fi.write(evor_str + event[6] + " " + event[7] + " " + event[8])
+      fi.write(evor_str + "000 " + event[6] + " " + event[7] + " " + event[8])
       fi.close()
       with open(label, "w") as Event:
          Event.write('.NAME Arushi Saxena\n.INST University of Memphis\n.ADDRESS 3525 Clayphil Avenue\n.EMAIL asaxena@memphis.edu\n.PHONE 9015303960\n\
