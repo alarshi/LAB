@@ -1,0 +1,8 @@
+**/usr/local/sac
+r *.HHZ
+sss
+qdp off
+bd sgf
+prs labels off
+sgftops ./f001.sgf record_section.ps
+q
