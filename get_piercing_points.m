@@ -21,14 +21,14 @@ for i = 1:length(lat_arr)-1
              '=[lat(lat>=lat_arr(i) & lat<lat_arr(i+1) & lng>=long_arr(j) & lng<long_arr(j+1)); lng(lat>=lat_arr(i) & lat<lat_arr(i+1) & lng>=long_arr(j) & lng<long_arr(j+1))] ;'] ) ;
         stat_names = data{1}(lat>=lat_arr(i) & lat<lat_arr(i+1) & lng>=long_arr(j) & lng<long_arr(j+1));
         bin_num =['bin_',num2str(num)];
-         if (~isempty( eval(bin_num)))
+         if (~isempty( eval(bin_num))) 
             bin_val = eval(['bin_',num2str(num)]);          
             data_lat_long = [( bin_val(1,:)- 29)'.*111 , (bin_val(1,:) + 98)'.*111, ...
                 zeros(length(bin_val(1,:)), 1)];
             out = [stat_names, num2cell(data_lat_long)];
             T = cell2table(out);
-              writetable(T,['tabledat',num2str(k),'.txt'], 'WriteVariableNames',false);
-            x(:, k) = [long_arr(j), lat_arr(i)];
+%               writetable(T,['tabledat',num2str(k),'.txt'], 'WriteVariableNames',false);
+            bins(:, k) = [long_arr(j), lat_arr(i)];
             k = k + 1;           
          end
         num = num + 1 ;
